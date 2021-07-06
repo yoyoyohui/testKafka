@@ -6,6 +6,15 @@ from sqlalchemy import false, true, null
 from kafka import KafkaProducer
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
+'''
+红色， 表示在工作区
+
+绿色， 表示在暂存区
+
+蓝色， 表示文件有修改，位于暂存区
+
+文件名无颜色，表示位于本地仓库区或已经提交到远程仓库区
+'''
 msg_dict = {
     "cache_time": 1625053011,
     "code": 0,
@@ -2020,13 +2029,10 @@ msg_dict = {
     "msg": "成功"
 }
 
-while 1:
-    for i in range(10):
-        msg = json.dumps(msg_dict)
-        msg = msg.encode()
-        producer.send('pdd_kafka', msg, partition=0)
-        time.sleep(2)
-        producer.flush()
-        producer.close()
-
+msg = json.dumps(msg_dict)
+msg = msg.encode()
+producer.send('pdd_kafka', msg, partition=0)
+time.sleep(2)
+producer.flush()
+producer.close()
 
