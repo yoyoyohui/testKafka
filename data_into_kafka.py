@@ -6,6 +6,7 @@ from sqlalchemy import false, true, null
 from kafka import KafkaProducer
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
+
 '''
 红色， 表示在工作区
 
